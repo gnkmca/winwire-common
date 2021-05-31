@@ -1,0 +1,10 @@
+dependencies {
+    implementation(
+            apache.commonsIo,
+            betterFiles
+    )
+
+    testImplementation(sparkTesting.scalatest) {
+        force(true)
+    }
+}

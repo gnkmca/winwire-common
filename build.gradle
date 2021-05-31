@@ -1,0 +1,150 @@
+import org.codehaus.groovy.runtime.GStringImpl
+
+plugins {
+    id 'scala'
+    id 'java-library'
+    id 'net.linguica.maven-settings' version "0.5"
+    id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+}
+
+sourceCompatibility = 1.8
+
+ext {
+    scalaCompatVersion = '2.11'
+    scalaVersion = '2.11.12'
+    sparkVersion = '2.4.4'
+    retrofitVersion = '2.7.1'
+    jacksonVersion = '2.9.9'
+    commonsVersion = '2.4'
+    bouncycastleVersion = '1.64'
+
+    spark = [
+            core          : "org.apache.spark:spark-core_${scalaCompatVersion}:${sparkVersion}",
+            sql           : "org.apache.spark:spark-sql_${scalaCompatVersion}:${sparkVersion}",
+            //kafka         : "org.apache.spark:spark-sql-kafka-0-10_${scalaCompatVersion}:${sparkVersion}",
+            cassandra     : "com.datastax.spark:spark-cassandra-connector_${scalaCompatVersion}:2.4.2",
+            //cosmosdbHelper: "com.microsoft.azure.cosmosdb:azure-cosmos-cassandra-spark-helper:1.0.0",
+            //delta         : "io.delta:delta-core_${scalaCompatVersion}:0.5.0"
+    ]
+    sparkCassandraConnector = "com.datastax.spark:spark-cassandra-connector_${scalaCompatVersion}:2.4.2" as GStringImpl
+    scopt = "com.github.scopt:scopt_${scalaCompatVersion}:3.7.1" as GStringImpl
+    snakeYaml = "org.yaml:snakeyaml:1.25"
+    //azureKvSecrets = 'com.azure:azure-security-keyvault-secrets:4.0.0'
+    //azureIdentity = 'com.azure:azure-identity:1.0.0'
+    retrofit = [
+            core   : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            jackson: "com.squareup.retrofit2:converter-jackson:${retrofitVersion}",
+            scalars: "com.squareup.retrofit2:converter-scalars:${retrofitVersion}"
+    ]
+    jackson = [
+            jsr310  : "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}",
+            databind: "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+            scala   : "com.fasterxml.jackson.module:jackson-module-scala_${scalaCompatVersion}:${jacksonVersion}"
+    ]
+    okhttpLogging = 'com.squareup.okhttp3:logging-interceptor:3.14.4'
+    scalaLogging = "com.typesafe.scala-logging:scala-logging-slf4j_${scalaCompatVersion}:2.1.2" as GStringImpl
+    wiremock = 'com.github.tomakehurst:wiremock-jre8:2.25.1'
+    sshj = 'com.hierynomus:sshj:0.27.0'
+    metastore = [
+            sqserver: "com.microsoft.sqlserver:mssql-jdbc:6.2.2.jre8",
+            dbcp    : "commons-dbcp:commons-dbcp:1.4",
+            h2db    : "com.h2database:h2:1.4.200"
+    ]
+    bouncyCastle = "org.bouncycastle:bcpg-jdk15on:${bouncycastleVersion}" as GStringImpl
+    commons = [
+            commonsio: "commons-io:commons-io:${commonsVersion}"
+    ]
+
+    sparkTesting = [
+            testingBase    : "com.holdenkarau:spark-testing-base_${scalaCompatVersion}:2.4.0_0.11.0",
+            hive           : "org.apache.spark:spark-hive_${scalaCompatVersion}:2.4.0",
+            scalatest      : "org.scalatest:scalatest_${scalaCompatVersion}:3.0.1",
+            jacksonDatabind: "com.fasterxml.jackson.core:jackson-databind:2.6.7"
+    ]
+    /*kafka = [
+            streams: "org.apache.kafka:kafka-streams-scala_${scalaCompatVersion}:2.4.1"
+    ]*/
+    google = [
+            gson: "com.google.code.gson:gson:2.8.5"
+    ]
+    apache = [
+            commonsIo: "commons-io:commons-io:2.6"
+    ]
+    betterFiles = "com.github.pathikrit:better-files_${scalaCompatVersion}:3.9.1" as GStringImpl
+}
+
+//String artifactVersion = '1.0.0'
+String artVersion = artifactVersion != null ? artifactVersion : '0.0.1'
+
+allprojects {
+    apply plugin: 'scala'
+    apply plugin: 'java-library'
+
+    group = 'com.winwire.adobe.common'
+    version = artVersion
+    archivesBaseName = project.name
+
+    repositories {
+        mavenCentral()
+        jcenter()
+
+    }
+
+    dependencies {
+        implementation(
+                "org.scala-lang:scala-library:${scalaVersion}",
+                "com.typesafe.scala-logging:scala-logging-slf4j_${scalaCompatVersion}:2.1.2"
+        )
+
+        testImplementation(
+                "junit:junit:4.12",
+                "org.scalatest:scalatest_${scalaCompatVersion}:3.1.0",
+                "org.scalatestplus:scalatestplus-junit_${scalaCompatVersion}:1.0.0-M2",
+                "org.scalamock:scalamock_${scalaCompatVersion}:4.4.0",
+                "org.mockito:mockito-scala_${scalaCompatVersion}:1.10.6"
+        )
+
+        testRuntimeOnly "org.scala-lang.modules:scala-xml_${scalaCompatVersion}:1.2.0"
+    }
+
+    test {
+        testLogging.showStandardStreams = true
+    }
+}
+
+subprojects {
+    apply plugin: 'maven-publish'
+    apply plugin: 'com.github.johnrengelman.shadow'
+
+    shadowJar {
+        zip64 = true
+        archiveClassifier.set(null)
+    }
+
+    String art = "$archivesBaseName-${artVersion}.jar"
+  //  String artifactDir = null
+    String artPath = artifactDir != null ? "$artifactDir/$art" : art
+
+    String[] fatJarProjects = ["applications", "deployment"]
+
+    publishing {
+        publications {
+            commonPublication(MavenPublication) {
+                groupId group
+                artifactId archivesBaseName
+                version artVersion
+               // if (project.name in fatJarProjects) {
+                    artifact artPath
+               // } else {
+               //     from components.java
+               // }
+            }
+        }
+
+    }
+}
+
+gradle.buildFinished {
+    project.buildDir.deleteDir()
+}

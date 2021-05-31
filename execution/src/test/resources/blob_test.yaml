@@ -1,0 +1,8 @@
+test: "test string"
+testInt: 1
+
+blob:
+  accountName: "mtcosmuse2sephptcxdbsa"
+  containerName: "data"
+  relativePath: "warehouse/CxDB.DB/purchase_order_detail"
+  sasToken: "test_token"

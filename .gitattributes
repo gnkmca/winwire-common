@@ -1,0 +1,2 @@
+sftp/src/test/resources/testFile.txt text eol=lf
+pgp/src/test/resources/pgp/decrypted/test.txt text eol=lf

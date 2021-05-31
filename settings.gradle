@@ -1,0 +1,15 @@
+rootProject.name = 'winwire-common'
+
+include 'config'
+include 'execution'
+//include 'databricks'
+//include 'sftp'
+//include 'deployment'
+//include 'applications'
+//include 'metastore'
+include 'utils'
+//include 'pgp'
+//include 'services'
+//include 'suppression'
+//include 'masking'
+

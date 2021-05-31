@@ -1,0 +1,34 @@
+dependencies {
+    implementation(
+            spark.core,
+            spark.sql,
+            //spark.kafka,
+            spark.cassandra,
+            //spark.delta,
+            //spark.cosmosdbHelper,
+            scopt,
+            project(':config'),
+            project(':utils')
+    )
+
+    implementation(sparkTesting.jacksonDatabind) {
+        force(true)
+    }
+
+    testImplementation(
+            sparkTesting.testingBase,
+            sparkTesting.hive
+    )
+
+    testImplementation(sparkTesting.scalatest) {
+        force(true)
+    }
+}
+
+test {
+    /**
+     * SparkContext is created once per JVM. However tests require to have separate contexts.
+     * So we need to create new process for every test.
+     **/
+    forkEvery = 1
+}

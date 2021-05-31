@@ -1,0 +1,2 @@
+test: !system my.test
+testInt: 1

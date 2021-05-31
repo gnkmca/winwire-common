@@ -1,0 +1,31 @@
+/bin/
+/project/
+*/target/
+*/out/
+
+# gradle #
+/.gradle/
+*/build/
+
+# intellij idea
+*.log
+*.iml
+*.ipr
+*.iws
+.idea
+
+# mac
+.DS_Store
+
+# other?
+.history
+.scala_dependencies
+.cache
+.cache-main
+
+#general
+*.class
+
+#concrete configs
+/*.yaml
+*.jar

@@ -1,0 +1,18 @@
+test: "test string"
+testInt: 1
+
+cassandra:
+  host: "test_host"
+  port: "9091"
+  username: "test_username"
+  password: "test_password"
+  sslEnabled: "true"
+  batchSizeRows: "200"
+  connectionsPerExecutorMax: "1"
+  concurrentWrites: "10"
+  concurrentReads: "256"
+  groupingBufferSize: "500"
+  keepAliveMs: "10000"
+  throughputMbPerSec: "1"
+  queryRetryCount: "1000"
+  readsPerSec: "10"
