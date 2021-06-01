@@ -18,7 +18,6 @@ ext {
     jacksonVersion = '2.9.9'
     commonsVersion = '2.4'
     bouncycastleVersion = '1.64'
-
     spark = [
             core          : "org.apache.spark:spark-core_${scalaCompatVersion}:${sparkVersion}",
             sql           : "org.apache.spark:spark-sql_${scalaCompatVersion}:${sparkVersion}",
