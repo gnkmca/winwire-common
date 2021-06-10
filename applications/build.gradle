@@ -1,0 +1,20 @@
+dependencies {
+    implementation(
+            spark.core,
+            spark.sql,
+            spark.kafka,
+           // spark.delta,
+            project(':execution'),
+            project(':config'),
+            project(':utils')
+    )
+
+    testImplementation(
+            sparkTesting.testingBase,
+            sparkTesting.hive
+    )
+
+    testImplementation(sparkTesting.scalatest) {
+        force(true)
+    }
+}

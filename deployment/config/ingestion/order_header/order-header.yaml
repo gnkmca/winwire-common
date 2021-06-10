@@ -1,0 +1,21 @@
+jobName: "OrderHeader"
+app:
+  resourcePath: "order_header"
+  options:
+    - key: edwDb
+      value: "retail"
+    - key: dtFormat
+      value: "yyyy-MM-dd-HHmmss"
+
+table:
+  name: "order_header"
+  dataSqlFile: "jdbc.hql"
+  preprocessSqlFile: "preprocess.hql"
+  saveMode: "append"
+  dbfsPath: "hdfs://127.0.0.1:9000/user/hive/warehouse/retail.db/order_header"
+jdbc:
+  url: "jdbc:mysql://127.0.0.1:3306"
+  driver: "com.mysql.cj.jdbc.Driver"
+  user: "root"
+  password: "Praneeth13"
+  fetchSize: "1000"

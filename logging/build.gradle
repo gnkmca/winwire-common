@@ -1,0 +1,5 @@
+dependencies {
+    implementation(
+            log.log4j
+    )
+}

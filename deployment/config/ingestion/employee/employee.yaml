@@ -1,0 +1,28 @@
+jobName: "employee"
+app:
+  resourcePath: "employee"
+  options:
+    - key: edwDb
+      value: "retail"
+    - key: dtFormat
+      value: "yyyy-MM-dd-HHmmss"
+metastore:
+  db: "etlmetastore"
+  url: "jdbc:mysql://127.0.0.1:3306"
+  driver: "com.mysql.cj.jdbc.Drive"
+  username: "root"
+  password: "Praneeth13"
+  etlProcessesTable: "etl_processes"
+  etlMetricsTable: "etl_metrics"
+table:
+  name: "employee"
+  dataSqlFile: "jdbc.hql"
+  preprocessSqlFile: "preprocess.hql"
+  saveMode: "append"
+  dbfsPath: "hdfs://127.0.0.1:9000/user/hive/warehouse/retail.db/department"
+jdbc:
+  url: "jdbc:mysql://127.0.0.1:3306"
+  driver: "com.mysql.cj.jdbc.Driver"
+  user: "root"
+  password: "Praneeth13"
+  fetchSize: "1000"

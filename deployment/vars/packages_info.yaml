@@ -1,0 +1,21 @@
+packages:
+- name: com.winwire.adobe:deployment
+  package_version: ''
+  packageid: ''
+  package_sha: ''
+- name: com.winwire.adobe:logging
+  package_version: ''
+  packageid: ''
+  package_sha: ''
+- name: com.winwire.adobe.ingestion:dp-ingestion
+  package_version: ''
+  packageid: ''
+  package_sha: ''
+
+
+# required for cd
+
+- name: com.winwire.adobe:applications
+  package_version: ''
+  packageid: ''
+  package_sha: ''

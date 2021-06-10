@@ -1,0 +1,11 @@
+variables:
+  - name: analytics_jar_artifact_path
+    value: _com.winwire.adobe.ingestion.etl
+  - name: ingestion_jar_name
+    value: dp-ingestion
+  - name: jdbc_app_main_class
+    value: com.winwire.adobe.ingestion.etl.JdbcUpdateApplication
+  - name: internal_app_main_class
+    value: com.winwire.adobe.ingestion.etl.InternalUpdateApplication
+  - name: internal_with_extn_app_main_class
+    value: com.winwire.adobe.ingestion.etl.InternalWithExtnUpdateApplication

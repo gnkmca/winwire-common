@@ -1,4 +1,4 @@
-# Data Platform Common
+# winwire adobe ingestion and aggregation
 
 A set of common libraries and utils for the whole data platform.
 
@@ -13,7 +13,6 @@ $HOME/.gradle/gradle.properties
 With following content:
 
 ```bash
-vstsMavenAccessToken={YOUR_MAVEN_REPOSITORY_TOKEN}
 artifactVersion=1.0.0
 artifactDir=
 ```
@@ -23,9 +22,9 @@ artifactDir=
 There is a limitation in Scala: "main" method cannot be found in companion object. So names should be different.
 
 ```scala
-class SegmentationApplication extends SparkApplication[SegmentConfig] { ... }
+class IngestionApplication extends SparkApplication[IngestionConfig] { ... }
 
-object SegmentationApp extends App {
-  new SegmentationApplication().main(args)
+object IngestionApp extends App {
+  new IngestionApplication().main(args)
 }
 ```

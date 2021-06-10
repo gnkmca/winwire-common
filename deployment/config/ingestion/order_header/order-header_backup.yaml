@@ -1,0 +1,30 @@
+jobName: "#{order_header_job_name}#"
+app:
+  resourcePath: "order_header"
+  options:
+    - key: edwDb
+      value: "retail"
+    - key: dtFormat
+      value: "yyyy-MM-dd-HHmmss"
+metastore:
+  db: "#{metastore_db}#"
+  url: "jdbc:sqlserver://#{metastore_host}#:#{metastore_port}#;databaseName=#{metastore_db}#"
+  driver: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+  username: "#{metastore_user}#"
+  password: "#{metastore_password}#"
+  etlProcessesTable: "etl_processes"
+  etlMetricsTable: "etl_metrics"
+table:
+  name: "order_header"
+  createSqlFile: "create.hql"
+  dataSqlFile: "jdbc.hql"
+  preprocessSqlFile: "preprocess.hql"
+  saveMode: "overwrite"
+  dbfsPath: "#{target_db_dbfs_path}#/order_header"
+  outputMetricFile: "dbx_metrics.hql"
+jdbc:
+  url: "jdbc:sqlserver://#{edw_host}#:#{edw_port}#;databaseName=retail;ApplicationIntent=ReadOnly;"
+  driver: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+  user: "#{edw_user}#"
+  password: "#{edw_password}#"
+  fetchSize: "1000"

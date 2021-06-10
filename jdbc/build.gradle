@@ -1,0 +1,15 @@
+dependencies {
+    implementation(
+            project(':utils'),
+            jdbcClient.dbcp,
+            jdbcClient.sqserver
+    )
+
+    testImplementation(
+            jdbcClient.h2db
+    )
+
+    testImplementation(sparkTesting.scalatest) {
+        force(true)
+    }
+}

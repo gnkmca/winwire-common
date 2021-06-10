@@ -18,35 +18,50 @@ ext {
     jacksonVersion = '2.9.9'
     commonsVersion = '2.4'
     bouncycastleVersion = '1.64'
+    deltaVersion = '0.6.1'
+    hadoopClient = 'org.apache.hadoop:hadoop-client:2.7.3'
+    azureStorage = 'com.microsoft.azure:azure-storage:6.1.0'
     spark = [
             core          : "org.apache.spark:spark-core_${scalaCompatVersion}:${sparkVersion}",
             sql           : "org.apache.spark:spark-sql_${scalaCompatVersion}:${sparkVersion}",
             //kafka         : "org.apache.spark:spark-sql-kafka-0-10_${scalaCompatVersion}:${sparkVersion}",
             cassandra     : "com.datastax.spark:spark-cassandra-connector_${scalaCompatVersion}:2.4.2",
-            //cosmosdbHelper: "com.microsoft.azure.cosmosdb:azure-cosmos-cassandra-spark-helper:1.0.0",
-            //delta         : "io.delta:delta-core_${scalaCompatVersion}:0.5.0"
+            cosmosdbHelper: "com.microsoft.azure.cosmosdb:azure-cosmos-cassandra-spark-helper:1.0.0",
+            delta         : "io.delta:delta-core_${scalaCompatVersion}:0.5.0",
+            avro          : "org.apache.spark:spark-avro_${scalaCompatVersion}:2.4.6"
     ]
     sparkCassandraConnector = "com.datastax.spark:spark-cassandra-connector_${scalaCompatVersion}:2.4.2" as GStringImpl
     scopt = "com.github.scopt:scopt_${scalaCompatVersion}:3.7.1" as GStringImpl
     snakeYaml = "org.yaml:snakeyaml:1.25"
-    //azureKvSecrets = 'com.azure:azure-security-keyvault-secrets:4.0.0'
-    //azureIdentity = 'com.azure:azure-identity:1.0.0'
+    azureKvSecrets = 'com.azure:azure-security-keyvault-secrets:4.0.0'
+    azureIdentity = 'com.azure:azure-identity:1.0.0'
+    mssql = "com.microsoft.sqlserver:mssql-jdbc:6.3.4.jre8-preview"
+    xsom = "com.sun.xsom:xsom:20140925"
     retrofit = [
             core   : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             jackson: "com.squareup.retrofit2:converter-jackson:${retrofitVersion}",
             scalars: "com.squareup.retrofit2:converter-scalars:${retrofitVersion}"
     ]
+    box = "com.box:box-java-sdk:2.50.1"
     jackson = [
             jsr310  : "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}",
             databind: "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
             scala   : "com.fasterxml.jackson.module:jackson-module-scala_${scalaCompatVersion}:${jacksonVersion}"
     ]
+    okhttp = "com.squareup.okhttp3:mockwebserver:4.7.2"
     okhttpLogging = 'com.squareup.okhttp3:logging-interceptor:3.14.4'
     scalaLogging = "com.typesafe.scala-logging:scala-logging-slf4j_${scalaCompatVersion}:2.1.2" as GStringImpl
     wiremock = 'com.github.tomakehurst:wiremock-jre8:2.25.1'
     sshj = 'com.hierynomus:sshj:0.27.0'
+    jdbcClient = [
+            //sqserver: "com.microsoft.sqlserver:mssql-jdbc:6.2.2.jre8",
+            sqserver: "mysql:mysql-connector-java:8.0.20",
+            dbcp    : "commons-dbcp:commons-dbcp:1.4",
+            h2db    : "com.h2database:h2:1.4.200"
+    ]
     metastore = [
-            sqserver: "com.microsoft.sqlserver:mssql-jdbc:6.2.2.jre8",
+            //sqserver: "com.microsoft.sqlserver:mssql-jdbc:6.2.2.jre8",
+            sqserver: "mysql:mysql-connector-java:8.0.20",
             dbcp    : "commons-dbcp:commons-dbcp:1.4",
             h2db    : "com.h2database:h2:1.4.200"
     ]
@@ -61,9 +76,7 @@ ext {
             scalatest      : "org.scalatest:scalatest_${scalaCompatVersion}:3.0.1",
             jacksonDatabind: "com.fasterxml.jackson.core:jackson-databind:2.6.7"
     ]
-    /*kafka = [
-            streams: "org.apache.kafka:kafka-streams-scala_${scalaCompatVersion}:2.4.1"
-    ]*/
+
     google = [
             gson: "com.google.code.gson:gson:2.8.5"
     ]
@@ -80,7 +93,7 @@ allprojects {
     apply plugin: 'scala'
     apply plugin: 'java-library'
 
-    group = 'com.winwire.adobe.common'
+    group = 'com.winwire.adobe'
     version = artVersion
     archivesBaseName = project.name
 

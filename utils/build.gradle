@@ -1,6 +1,11 @@
 dependencies {
     implementation(
             apache.commonsIo,
+            hadoopClient,
+            azureStorage,
+            project(":config"),
+            spark.core,
+            spark.sql,
             betterFiles
     )
 

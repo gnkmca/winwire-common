@@ -1,0 +1,19 @@
+jarfiles:
+
+  - name: dp-ingestion.jar
+    jar_config_name: ingestion.yaml
+    kind: ingestion
+    jobs:
+
+      # ingestion [pipelines]
+
+      - name: 'OrderHeader'
+        kind: order_header
+        job_config_name: order-header-job.yaml
+        job_jar_config_template_name: order-header.yaml
+        job_jar_deployment_template_name: order-header.deployment.yaml
+      - name: 'Department'
+        kind: department
+        job_config_name: department-job.yaml
+        job_jar_config_template_name: employee.yaml
+        job_jar_deployment_template_name: employee.deployment.yaml

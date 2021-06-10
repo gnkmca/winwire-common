@@ -1,0 +1,33 @@
+dependencies {
+    implementation(
+            project(':config'),
+            project(':utils'),
+            project(':execution'),
+            project(':jdbc'),
+            spark.sql,
+            spark.core,
+            spark.avro,
+            spark.delta,
+            mssql,
+            sshj,
+            okhttp,
+            xsom,
+            snakeYaml,
+            box,
+            "org.scala-lang:scala-library:${scalaVersion}",
+            "com.typesafe.scala-logging:scala-logging-slf4j_${scalaCompatVersion}:2.1.2"
+    )
+    testImplementation(
+            "junit:junit:4.12",
+            "org.scalatest:scalatest_${scalaCompatVersion}:3.1.0",
+            "org.scalatestplus:scalatestplus-junit_${scalaCompatVersion}:1.0.0-M2",
+            "org.scalamock:scalamock_${scalaCompatVersion}:4.4.0",
+            "org.mockito:mockito-scala_${scalaCompatVersion}:1.10.6"
+    )
+
+    testImplementation("org.scalatest:scalatest_${scalaCompatVersion}:3.0.1") {
+        force(true)
+    }
+
+    testRuntimeOnly "org.scala-lang.modules:scala-xml_${scalaCompatVersion}:1.2.0"
+}

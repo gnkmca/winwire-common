@@ -4,7 +4,7 @@ dependencies {
             spark.sql,
             //spark.kafka,
             spark.cassandra,
-            //spark.delta,
+            spark.delta,
             //spark.cosmosdbHelper,
             scopt,
             project(':config'),
